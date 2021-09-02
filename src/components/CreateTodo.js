@@ -75,20 +75,41 @@ const Input = styled.input`
 function TodoCreate() {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('')
-  const onToggle = () => setOpen(!open)
-  const onChange = (e) => setValue(e.target.value)
-  const onSubmit = (e) => {
-    e.preventDefault()
-  }
-
   const dispatch = useTodoDispatch()
   const nextId = useTodoNextId()
+
+  const onToggle = () => setOpen(!open)
+  const onChange = (e) => {
+    setValue(e.target.value)
+    console.log('changing')
+  }
+  const onSubmit = (e) => {
+    console.log('here!')
+    e.preventDefault()
+    dispatch({
+      type: 'CREATE',
+      todo: {
+        id: nextId.current,
+        text: value,
+        done: false,
+      },
+    })
+    setValue('')
+    setOpen(false)
+    nextId.current += 1
+  }
+
   return (
     <>
       {open && (
         <InsertFormPositioner>
           <InsertForm onSubmit={onSubmit}>
-            <Input placeholder="할 일을 입력 후 , Enter를 누르세요" autoFocus onChange={onChange} />
+            <Input
+              placeholder="할 일을 입력 후 , Enter를 누르세요"
+              autoFocus
+              onChange={onChange}
+              value={value}
+            />
           </InsertForm>
         </InsertFormPositioner>
       )}
