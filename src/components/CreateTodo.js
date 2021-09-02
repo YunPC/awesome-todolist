@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { MdAdd } from 'react-icons/md'
 
@@ -29,11 +29,27 @@ const CircleButton = styled.button`
 
   border: none;
   outline: none;
+
+  transition: 0.125s all ease-in;
+  ${(props) =>
+    props.open &&
+    css`
+      background: #ff6b6b;
+      &:hover {
+        background: #ff8787;
+      }
+      &:active {
+        background: #fa5252;
+      }
+      transform: translate(-50%, 50%) rotate(45deg);
+    `}
 `
 
 function TodoCreate() {
+  const [open, setOpen] = useState(false)
+  const onToggle = () => setOpen(!open)
   return (
-    <CircleButton>
+    <CircleButton onClick={onToggle} open={open}>
       <MdAdd />
     </CircleButton>
   )
