@@ -45,13 +45,36 @@ const CircleButton = styled.button`
     `}
 `
 
+const InsertFormPositioner = styled.div`
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+`
+
+const InsertForm = styled.div`
+  background: #f8f9fa;
+  padding: 32px;
+  padding-bottom: 72px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  border-top: 1px solid #e9ecef;
+`
+
 function TodoCreate() {
   const [open, setOpen] = useState(false)
   const onToggle = () => setOpen(!open)
   return (
-    <CircleButton onClick={onToggle} open={open}>
-      <MdAdd />
-    </CircleButton>
+    <>
+      {open && (
+        <InsertFormPositioner>
+          <InsertForm>...</InsertForm>
+        </InsertFormPositioner>
+      )}
+      <CircleButton onClick={onToggle} open={open}>
+        <MdAdd />
+      </CircleButton>
+    </>
   )
 }
 
