@@ -27,7 +27,7 @@ function todoReducer(state, action) {
   switch (action.type) {
     case 'CREATE':
       return state.concat(action.todo)
-    case 'TOOGLE':
+    case 'TOGGLE':
       return state.map((todo) => (todo.id === action.id ? { ...todo, done: !todo.done } : todo))
     case 'REMOVE':
       return state.filter((todo) => todo.id !== action.id)
